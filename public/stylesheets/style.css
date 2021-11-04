@@ -28,11 +28,8 @@ a {
 }
 
 .home {
-/*   padding-top: 20px;
-  padding-bottom: 20px; */
   min-height: 100vh;
   display: flex;
- /*  align-items: center; */
  margin-top: 80px;
   justify-content: center;
 }
@@ -52,11 +49,36 @@ a {
   align-items: center;
   width: 60%;  
   margin-top: 80px;
-  
-
 }
 .img{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#container-tab{
+  width: 100vw;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 50px;
+}
+
+#bloc-tab{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: lighter;
+}
+
+#mytickets{
+  margin-left: 200px;
+}
+
+#tbody{
+  font-weight: normal;
+}
+
+#col1{
+  font-weight: bold;
 }
