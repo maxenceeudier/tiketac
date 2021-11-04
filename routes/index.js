@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 router.get('/home', async function (req, res, next) {
   if(!req.session.userSession){
     res.redirect('/')}
-  res.render('home')
+  res.render('home',{journeyExist})
 })
 
 router.get('/basket', async function (req, res, next) {
@@ -33,11 +33,7 @@ router.get('/basket', async function (req, res, next) {
   res.render('basket')
 })
 
-router.get('/journey', async function (req, res, next) {
-  if(!req.session.userSession){
-    res.redirect('/')}
-  res.render('journey')
-})
+
 
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
@@ -97,12 +93,12 @@ router.get('/basket', async function(req, res, next) {
 });
 
 
-router.get('/home',function(req,res,next){
-  res.render('home',{journeyExist});
-});
+
 
 router.post('/journey',async function(req,res,next){
-  
+  if(!req.session.userSession){
+    res.redirect('/')}
+
   var date = new Date(req.body.date);
   var departure = req.body.departure;
   var arrival = req.body.arrival;

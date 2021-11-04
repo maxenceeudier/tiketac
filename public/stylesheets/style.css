@@ -83,3 +83,24 @@ a {
 #col1{
   font-weight: bold;
 }
+
+#bloc{
+  width: 60%;
+  margin-top: 80px;
+}
+.cards{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.okPrice{
+  display: flex;
+  justify-content: end;
+}
+.price{
+  margin-right: 20px;
+}
