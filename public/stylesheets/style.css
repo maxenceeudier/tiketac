@@ -50,8 +50,6 @@ a {
   align-items: center;
   width: 60%;  
   margin-top: 80px;
-  
-
 }
 .img{
   display: flex;
@@ -59,22 +57,29 @@ a {
   align-items: center;
 }
 
-.cards{
+#container-tab{
+  width: 100vw;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 50px;
+}
+
+#bloc-tab{
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color: white;
-  padding: 20px;
-  margin-top: 20px;
+  font-weight: lighter;
 }
-.okPrice{
-  display: flex;
-  justify-content: end;
+
+#mytickets{
+  margin-left: 200px;
 }
-.price{
-  margin-right: 10px;
+
+#tbody{
+  font-weight: normal;
 }
-#bloc{
-  width: 60%;
-  margin-top: 80px;
+
+#col1{
+  font-weight: bold;
 }
