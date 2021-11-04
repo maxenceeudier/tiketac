@@ -48,4 +48,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//helpers
+app.locals.dateFormat = function (date){
+  return ('0'+date.getDate()).slice(-2)+'/'+ ('0'+parseInt(date.getMonth()+1)).slice(-2);
+};
+
 module.exports = app;
