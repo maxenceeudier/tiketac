@@ -17,16 +17,14 @@
         <div id="container">
             <div class="container">
                 <h2 class="row mb-5" style="color:white">One-way ticket :</h2>
-                <% if (journeyExist === false){ %>
-                <h4 style="color:red">This journey doesn't exist </h4>
-                <% } %>
-                
                 <form class="row mb-5 " action="/journey" method="POST">
                     <div class="col- col-md-3 offsetr-1 offsetr-md-0 ">
-                        <input type="text" placeholder="From: Paris, Marseille ..." name="departure" class="form-control" required>
+                        <input type="text" placeholder="From: Paris, Marseille ..." name="departure"
+                            class="form-control" required>
                     </div>
                     <div class="col-12 col-md-3 offsetr-1 offsetr-md-0">
-                        <input type="text" placeholder="To: Lille, Nantes ..." name="arrival" class="form-control" required>
+                        <input type="text" placeholder="To: Lille, Nantes ..." name="arrival" class="form-control"
+                            required>
                     </div>
                     <div class="col-10 col-md-3 offsetr-1 offsetr-md-0">
                         <input type="date" name="date" class="form-control" required>
