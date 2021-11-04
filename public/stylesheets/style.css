@@ -28,5 +28,23 @@ a {
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
-
 }
+
+.home {
+/*   padding-top: 20px;
+  padding-bottom: 20px; */
+  min-height: 100vh;
+  display: flex;
+ /*  align-items: center; */
+ margin-top: 80px;
+  justify-content: center;
+}
+
+.form-group{
+  margin-bottom: 15px;
+}
+
+.titleForm{
+  color: white;
+}
+
