@@ -17,16 +17,33 @@ a {
   color: #00B7FF;
 }
 
-.container{
-  width: 100vw;
-}
+
 #navbar{
   width: 100vw;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
 
+}
+#section{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  
+}
+#container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;  
+  margin-top: 80px;
+  
+
+}
+.img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
