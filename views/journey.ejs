@@ -23,7 +23,7 @@
           <p class="col-12 col-sm-4">train departure at : <%= journey[i].departureTime %> pm</p>
           <div class="okPrice col-6 col-sm-4 ">
             <h3 class="price"><%= journey[i].price %>€</h3>
-            <button class="btn btn-danger">ok</button>
+            <a href="/basket?cities=<%= journey[i].departure %>/<%= journey[i].arrival %>&date=<%= dateFormatYear(journey[0].date) %>&hour=<%= journey[i].departureTime %>&price=<%= journey[i].price %>"><button class="btn btn-danger">ok</button></a>
           </div>
         </div>
         <% } %>

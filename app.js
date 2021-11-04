@@ -52,5 +52,8 @@ app.use(function(err, req, res, next) {
 app.locals.dateFormat = function (date){
   return ('0'+date.getDate()).slice(-2)+'/'+ ('0'+parseInt(date.getMonth()+1)).slice(-2);
 };
+app.locals.dateFormatYear = function (date){
+  return ('0'+date.getDate()).slice(-2)+'/'+ ('0'+parseInt(date.getMonth()+1)).slice(-2)+'/'+date.getFullYear();
+};
 
 module.exports = app;
