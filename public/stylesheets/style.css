@@ -17,12 +17,9 @@ a {
   color: #00B7FF;
 }
 
-.container{
-  width: 100vw;
-}
+
 #navbar{
   width: 100vw;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,8 +40,23 @@ a {
 .form-group{
   margin-bottom: 15px;
 }
-
-.titleForm{
-  color: white;
+#section{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  
 }
+#container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;  
+  margin-top: 80px;
+  
 
+}
+.img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
