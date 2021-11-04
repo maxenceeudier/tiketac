@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 var journeyModel = require('../models/journeys');
 var userModel = require('../models/users')
-var  journeyExist = true;
+
 
 // useNewUrlParser ;)
 
@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 router.get('/home', async function (req, res, next) {
   if(!req.session.userSession){
     res.redirect('/')}
-  res.render('home',{journeyExist})
+  res.render('home',)
 })
 
 router.get('/basket', async function (req, res, next) {
@@ -110,8 +110,8 @@ router.post('/journey',async function(req,res,next){
 
     res.render('journey',{journey});
   }else{
-    journeyExist = false;
-  res.redirect('/home')
+    
+  res.render('noJourney')
   }
   
 });
