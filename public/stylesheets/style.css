@@ -1,11 +1,11 @@
 body {
-  padding: 50px;
+ 
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   width: 100vw;
   height: 100vh;
 
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c5deea+0,8abbd7+31,066dab+100;Web+2.0+Blue+3D+%231 */
-/*background: #c5deea; /* Old browsers */
+background: #c5deea; /* Old browsers */
 background: -moz-linear-gradient(top,  #c5deea 0%, #8abbd7 31%, #066dab 100%) no-repeat; /* FF3.6-15 */
 background: -webkit-linear-gradient(top,  #c5deea 0%,#8abbd7 31%,#066dab 100%) no-repeat; /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom,  #c5deea 0%,#8abbd7 31%,#066dab 100%) no-repeat; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -15,4 +15,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c5deea', end
 
 a {
   color: #00B7FF;
+}
+
+.container{
+  width: 100vw;
+}
+#navbar{
+  width: 100vw;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+
 }
