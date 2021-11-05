@@ -87,10 +87,6 @@ router.get('/result', function(req, res, next) {
 });
 
 
-router.get('/basket', async function(req, res, next) {
-
-  res.render('basket');
-});
 
 
 
@@ -125,5 +121,18 @@ router.post('/journey',async function(req,res,next){
   }
   
 });
+
+router.get('/deconnection', async function (req, res, next) {
+  req.session.userSession = null;
+  res.redirect('/')
+});
+
+router.get('/lastTrips', async function (req, res, next) {
+  if(!req.session.userSession){
+    res.redirect('/')}
+  res.render('lastTrips')
+})
+
+
 
 module.exports = router;
