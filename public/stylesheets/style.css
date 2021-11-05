@@ -111,3 +111,13 @@ a {
   flex-direction: column;
 
 }
+
+.empty{
+  color:#D64733;
+  margin-top: 80px;
+  font-size: large;
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

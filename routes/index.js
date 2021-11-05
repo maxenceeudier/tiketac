@@ -4,7 +4,8 @@ var router = express.Router();
 const mongoose = require('mongoose');
 
 var journeyModel = require('../models/journeys');
-var userModel = require('../models/users')
+var userModel = require('../models/users');
+var ordersModel = require('../models/orders');
 
 
 // useNewUrlParser ;)
@@ -80,26 +81,37 @@ router.get('/result', function(req, res, next) {
 });
 
 
-<<<<<<< HEAD
-=======
 router.get('/basket', async function(req, res, next) {
   /* if(!req.session.userSession){
     res.redirect('/')} */
-
-    req.session.dataJourney = [];
-    req.session.dataJourney.push({
+    if (typeof req.session.dataJourney == 'undefined') {
+      req.session.dataJourney = [];
+    }
+   
+    if (req.query.cities != null){
+      req.session.dataJourney.push({
       journey: req.query.cities,
       date: req.query.date,
       departureTime: req.query.hour,
       passenger: "Toto",
-      price: req.query.price
-    })
+      price: parseInt(req.query.price),
+      id: req.query.id
+    });
+    }
+    
+    var empty = false;
+    if (req.session.dataJourney.length === 0){
+      empty = true;
+    }
 
+    
+
+
+    
     console.log(req.session.dataJourney);
     
-  res.render('basket',{dataJourney: req.session.dataJourney});
+  res.render('basket',{dataJourney: req.session.dataJourney,empty});
 });
->>>>>>> aa04b39ee5c26c6365f6eac4e3632bb383598797
 
 
 
@@ -137,14 +149,36 @@ router.post('/journey',async function(req,res,next){
 
 router.get('/deconnection', async function (req, res, next) {
   req.session.userSession = null;
+  req.session.dataJourney = null;
   res.redirect('/')
 });
 
 router.get('/lastTrips', async function (req, res, next) {
   if(!req.session.userSession){
     res.redirect('/')}
+  if (typeof req.session.dataJourney == 'undefined') {
+    req.session.dataJourney = [];
+  }
+  
+  var ordersId = [];
+  for (let i=0; i<req.session.dataJourney.length;i++){
+    ordersId.push(req.session.dataJourney[i].id);
+  }
+  
+ if(req.session.dataJourney.length != 0){
+  var order = new ordersModel({
+    userId : req.session.userSession.id,
+    ordersId: ordersId
+
+  });
+ 
+  orderSaved = await order.save();
+  }
+  
   res.render('lastTrips')
-})
+});
+
+
 
 
 
