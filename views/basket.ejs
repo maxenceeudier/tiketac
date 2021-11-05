@@ -26,34 +26,36 @@
               <th>Journey</th>
               <th>Date</th>
               <th>Departure time</th>
+              <th>User name</th>
               <th>Price</th>
             </tr>
           </thead>
+          
+          <tbody id="tbody">
+            <% 
+            var totalCmd = 0;
+              for (let i=0; i<dataJourney.length;i++){ %>
+            <tr>
+              <td id="col1"><%=i+1%></td>
+              <td><%= dataJourney[i].journey %></td>
+              <td><%= dataJourney[i].date %></td>
+              <td><%= dataJourney[i].departureTime %></td>
+              <td><%= dataJourney[i].passenger %></td>
+              <td><%= dataJourney[i].price %> €</td>
+            </tr>
+          </tbody>
+          <% totalCmd += dataJourney[i].price
+          }%>
           <tfoot class="table-danger">
             <tr>
               <th>Total</th>
               <th></th>
               <th></th>
               <th></th>
-              <th>218 €</th>
+              <th></th>
+              <th><%=totalCmd%> €</th>
             </tr>
           </tfoot>
-          <tbody id="tbody">
-            <tr>
-              <td id="col1">1</td>
-              <td>Paris / Lille</td>
-              <td>02/08/2019</td>
-              <td>15.00 pm</td>
-              <td>93 €</td>
-            </tr>
-            <tr>
-              <td id="col1">2</td>
-              <td>Paris / Lille</td>
-              <td>02/08/2019</td>
-              <td>15.00 pm</td>
-              <td>93 €</td>
-            </tr>
-          </tbody>
         </table>
 
       </div>
