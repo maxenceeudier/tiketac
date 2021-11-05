@@ -105,9 +105,19 @@ router.post('/journey',async function(req,res,next){
   if(!req.session.userSession){
     res.redirect('/')}
 
+  // fonction pour mettre les villes au bon format
+  var formatCities = (citie) => {
+    citie.toLowerCase();
+    var firstLetter = citie[0].toUpperCase();
+    var restWord = citie.slice(1);
+    citie = `${firstLetter}${restWord}`;
+    console.log(citie);
+    return citie;
+  };
+
   var date = new Date(req.body.date);
-  var departure = req.body.departure;
-  var arrival = req.body.arrival;
+  var departure = formatCities(req.body.departure);
+  var arrival = formatCities(req.body.arrival);
   var journey = await journeyModel.find({departure:departure,arrival:arrival,date:date});
 
  
