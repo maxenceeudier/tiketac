@@ -19,8 +19,8 @@
         <h2 style="color:white" class="row mb-5">Tickets available on <%= dateFormat(journey[0].date) %> :</h2>
         <% for (let i=0; i<journey.length;i++){ %>
         <div class="cards row mb-3">
-          <h3 class="col-12 col-sm-4"><%= journey[i].departure %>/ <%= journey[i].arrival %></h3>
-          <p class="col-12 col-sm-4">train departure at : <%= journey[i].departureTime %> pm</p>
+          <h3 class="col-12 col-md-4"><%= journey[i].departure %>/ <%= journey[i].arrival %></h3>
+          <p class="col-12 col-md-4">train departure at : <%= journey[i].departureTime %> pm</p>
           <div class="okPrice col-6 col-sm-4 ">
             <h3 class="price"><%= journey[i].price %>€</h3>
             <a href="/basket?cities=<%= journey[i].departure %>/<%= journey[i].arrival %>&date=<%= dateFormatYear(journey[0].date) %>&hour=<%= journey[i].departureTime %>&price=<%= journey[i].price %>"><button class="btn btn-danger">ok</button></a>
