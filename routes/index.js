@@ -27,13 +27,6 @@ router.get('/home', async function (req, res, next) {
   res.render('home',)
 })
 
-router.get('/basket', async function (req, res, next) {
-  if(!req.session.userSession){
-    res.redirect('/')}
-  res.render('basket')
-})
-
-
 
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
@@ -87,6 +80,26 @@ router.get('/result', function(req, res, next) {
 });
 
 
+<<<<<<< HEAD
+=======
+router.get('/basket', async function(req, res, next) {
+  /* if(!req.session.userSession){
+    res.redirect('/')} */
+
+    req.session.dataJourney = [];
+    req.session.dataJourney.push({
+      journey: req.query.cities,
+      date: req.query.date,
+      departureTime: req.query.hour,
+      passenger: "Toto",
+      price: req.query.price
+    })
+
+    console.log(req.session.dataJourney);
+    
+  res.render('basket',{dataJourney: req.session.dataJourney});
+});
+>>>>>>> aa04b39ee5c26c6365f6eac4e3632bb383598797
 
 
 
