@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 var journeyModel = require('../models/journeys');
 var userModel = require('../models/users');
 var ordersModel = require('../models/orders');
-
+var empty = false;
 
 // useNewUrlParser ;)
 
@@ -18,6 +18,7 @@ var date = ["2018-11-20", "2018-11-21", "2018-11-22", "2018-11-23", "2018-11-24"
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+  
   res.render('index');
 });
 
@@ -26,7 +27,7 @@ router.get('/home', async function (req, res, next) {
   if (!req.session.userSession) {
     res.redirect('/')
   }
-  res.render('home',)
+  res.render('home', )
 })
 
 
@@ -68,8 +69,9 @@ router.get('/result', function (req, res, next) {
   // Permet de savoir combien de trajets il y a par ville en base
   for (i = 0; i < city.length; i++) {
 
-    journeyModel.find(
-      { departure: city[i] }, //filtre
+    journeyModel.find({
+        departure: city[i]
+      }, //filtre
 
       function (err, journey) {
 
@@ -78,44 +80,51 @@ router.get('/result', function (req, res, next) {
     )
   }
 
-  res.render('index', { title: 'Express' });
+  res.render('index', {
+    title: 'Express'
+  });
 });
 
 
-router.get('/basket', async function(req, res, next) {
-  /* if(!req.session.userSession){
-    res.redirect('/')} */
-    if (typeof req.session.dataJourney == 'undefined') {
-      req.session.dataJourney = [];
-    }
-   
-    if (req.query.cities != null){
-      req.session.dataJourney.push({
+router.get('/basket', async function (req, res, next) {
+  if (!req.session.userSession) {
+    res.redirect('/')
+  }
+
+  if (typeof req.session.dataJourney == 'undefined') {
+    req.session.dataJourney = [];
+  }
+
+  if (req.query.cities != null) {
+    req.session.dataJourney.push({
       journey: req.query.cities,
       date: req.query.date,
       departureTime: req.query.hour,
-      passenger: "Toto",
+      passenger: `${req.query.lastname} ${req.query.firstname}`,
       price: parseInt(req.query.price),
       id: req.query.id
     });
-    }
-    
-    var empty = false;
-    if (req.session.dataJourney.length === 0){
-      empty = true;
-    }
+  }
 
-    console.log(req.session.dataJourney);
-    
-  res.render('basket',{dataJourney: req.session.dataJourney,empty});
+
+  if (req.session.dataJourney.length === 0) {
+    empty = true;
+  }
+
+
+  res.render('basket', {
+    dataJourney: req.session.dataJourney,
+    empty
+  });
 });
 
 
 
 
-router.post('/journey',async function(req,res,next){
-  if(!req.session.userSession){
-    res.redirect('/')}
+router.post('/journey', async function (req, res, next) {
+  if (!req.session.userSession) {
+    res.redirect('/')
+  }
 
   // fonction pour mettre les villes au bon format
   var formatCities = (citie) => {
@@ -130,10 +139,20 @@ router.post('/journey',async function(req,res,next){
   var date = new Date(req.body.date);
   var departure = formatCities(req.body.departure);
   var arrival = formatCities(req.body.arrival);
-  var journey = await journeyModel.find({ departure: departure, arrival: arrival, date: date });
+  var journey = await journeyModel.find({
+    departure: departure,
+    arrival: arrival,
+    date: date
+  });
+
+  var user = req.session.userSession;
+  console.log(user);
 
   if (journey.length !== 0) {
-    res.render('journey', { journey });
+    res.render('journey', {
+      journey,
+      user
+    });
   } else {
     res.render('noJourney')
   }
@@ -143,16 +162,25 @@ router.post('/journey',async function(req,res,next){
 
 
 
+
 /****** DELETE JOURNEY BASKET ******/
 router.get('/delete-journey', function (req, res, next) {
-  /* if(!req.session.userSession){
-    res.redirect('/')} */
-    console.log(req.query.position);
-    console.log(req.session.dataJourney);
+  if (!req.session.userSession) {
+    res.redirect('/')
+  }
+  console.log(req.query.position);
+  console.log(req.session.dataJourney);
   req.session.dataJourney.splice(req.query.position, 1);
-  
 
-  res.render('basket', { dataJourney: req.session.dataJourney })
+  //si le panier est vide
+  if (req.session.dataJourney.length === 0) {
+    empty = true;
+  }
+
+  res.render('basket', {
+    dataJourney: req.session.dataJourney,
+    empty
+  })
 })
 
 
@@ -166,28 +194,53 @@ router.get('/deconnection', async function (req, res, next) {
 
 /****** LASTRIPS ******/
 router.get('/lastTrips', async function (req, res, next) {
-  if(!req.session.userSession){
-    res.redirect('/')}
+  if (!req.session.userSession) {
+    res.redirect('/')
+  }
+
   if (typeof req.session.dataJourney == 'undefined') {
     req.session.dataJourney = [];
   }
-  
-  var ordersId = [];
-  for (let i=0; i<req.session.dataJourney.length;i++){
-    ordersId.push(req.session.dataJourney[i].id);
-  }
-  
- if(req.session.dataJourney.length != 0){
-  var order = new ordersModel({
-    userId : req.session.userSession.id,
-    ordersId: ordersId
 
-  });
- 
-  orderSaved = await order.save();
+
+  for (let i = 0; i < req.session.dataJourney.length; i++) {
+
+    if (req.session.dataJourney.length != 0) {
+      var order = new ordersModel({
+        userId: req.session.userSession.id,
+        ordersId: req.session.dataJourney[i].id
+
+      });
+    }
+
+    orderSaved = await order.save();
+  };
+
+  res.render('basket', {
+    dataJourney: req.session.dataJourney,
+    empty
+  })
+});
+
+
+router.get('/mylasttrips', async function (req, res, next) {
+  if (!req.session.userSession) {
+    res.redirect('/')
   }
+
+  var orderUser = await ordersModel.find({
+    userId: req.session.userSession.id
+  });
+  console.log(orderUser);
+  var historique = [];
+  for (let i = 0; i < orderUser.length; i++) {
+    historique.push(await journeyModel.findById(`${orderUser[i].ordersId}`))
+  }
+  console.log(historique);
+
   
-  res.render('lastTrips')
+ 
+  res.render('lastTrips', { historique})
 });
 
 

@@ -14,14 +14,15 @@ router.post('/sign-up', async function (req, res, next) {
   var userIdent = await userModel.findOne({email: req.body.email});
   if(!userIdent && req.body.name != null && req.body.firstname != null && req.body.email != null && req.body.password != null){
     var newUser = new userModel({
-      name: req.body.name,
+      lastname: req.body.name,
       firstname: req.body.firstname,
       email: req.body.email,
       password: req.body.password,
     });
     var newUserSaved = await newUser.save();
     req.session.userSession = {
-      name: newUserSaved.name,
+      lastname: newUserSaved.lastname,
+      firstname: newUserSaved.firstname,
       id: newUserSaved.id
     };
     console.log(req.session.userSession);
@@ -35,7 +36,8 @@ router.post('/sign-in', async function (req, res, next){
 var userExist = await userModel.findOne({email: req.body.email, password: req.body.password});
 if(userExist && req.body.email != null && req.body.password !=null){
 req.session.userSession = {
-  name: userExist.name,
+  lastname: userExist.lastname,
+  firstname: userExist.firstname,
   id: userExist.id
 };
 console.log('already exist');

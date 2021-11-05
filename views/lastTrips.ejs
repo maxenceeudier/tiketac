@@ -12,7 +12,52 @@
 
     <%- include('./partials/navbar'); %>
 
+    <div id="container-tab">
 
+      <div id="mytickets">
+        <h4 class="titleForm mb-4 text-white">My last trips :</h4>
+      </div>
+      <!-- if empty
+        <p  class="empty">You never travelled with us </p>
+      -->
+
+      <div id="bloc-tab">
+        <!-- TABLEAU -->
+        <table id="journey-list" class="table table-borderless table-light" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Journey</th>
+              <th>Date</th>
+              <th>Departure time</th>
+             
+              <th>Price</th>
+            </tr>
+          </thead>
+          
+          <tbody >
+            <%           
+              for (let i=0; i<historique.length;i++){ %>
+            <tr id="tbody">
+              <td id="col1"><%=i+1%></td>
+              <td><%= historique[i].departure %> / <%= historique[i].arrival %> </td>
+              <td><%= dateFormatYear(historique[i].date) %></td>
+              <td><%= historique[i].departureTime %></td>
+              
+              <td><%= historique[i].price %> €</td>
+            </tr>
+          </tbody>
+       <% } %>
+        </table>
+
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <a href="/home"><button type="submit" class="btn btn-danger">Home</button></a>
+      </div>
+      
+
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
