@@ -120,11 +120,10 @@ router.get('/basket', async function (req, res, next) {
 
 
 
-
-router.post('/journey', async function (req, res, next) {
-  if (!req.session.userSession) {
-    res.redirect('/')
-  }
+/****** JOURNEY ******/
+router.post('/journey',async function(req,res,next){
+  if(!req.session.userSession){
+    res.redirect('/')}
 
   // fonction pour mettre les villes au bon format
   var formatCities = (citie) => {
@@ -165,29 +164,23 @@ router.post('/journey', async function (req, res, next) {
 
 /****** DELETE JOURNEY BASKET ******/
 router.get('/delete-journey', function (req, res, next) {
-  if (!req.session.userSession) {
-    res.redirect('/')
-  }
-  console.log(req.query.position);
-  console.log(req.session.dataJourney);
-  req.session.dataJourney.splice(req.query.position, 1);
+  if(!req.session.userSession){
+    res.redirect('/')}
 
-  //si le panier est vide
-  if (req.session.dataJourney.length === 0) {
+  req.session.dataJourney.splice(req.query.position, 1);
+  
+  if (req.session.dataJourney.length === 0){
     empty = true;
   }
 
-  res.render('basket', {
-    dataJourney: req.session.dataJourney,
-    empty
-  })
+  res.render('basket', { dataJourney: req.session.dataJourney, empty })
 })
 
 
 /****** DECONNEXION ******/
 router.get('/deconnection', async function (req, res, next) {
   req.session.userSession = null;
-  req.session.dataJourney = null;
+  
   res.redirect('/')
 });
 
