@@ -90,11 +90,11 @@ router.get('/basket', async function(req, res, next) {
       date: req.query.date,
       departureTime: req.query.hour,
       passenger: "Toto",
-      price: req.query.price
+      price: parseInt(req.query.price, 10)
     })
 
     console.log(req.session.dataJourney);
-    
+
   res.render('basket',{dataJourney: req.session.dataJourney});
 });
 
