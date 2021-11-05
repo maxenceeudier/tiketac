@@ -7,6 +7,7 @@ var journeyModel = require('../models/journeys');
 var userModel = require('../models/users');
 var ordersModel = require('../models/orders');
 
+var empty = false;
 
 // useNewUrlParser ;)
 
@@ -100,19 +101,19 @@ router.get('/basket', async function(req, res, next) {
     });
     }
     
-    var empty = false;
+  
     if (req.session.dataJourney.length === 0){
       empty = true;
     }
 
     console.log(req.session.dataJourney);
     
-  res.render('basket',{dataJourney: req.session.dataJourney,empty});
+  res.render('basket',{dataJourney: req.session.dataJourney, empty});
 });
 
 
 
-
+/****** JOURNEY ******/
 router.post('/journey',async function(req,res,next){
   if(!req.session.userSession){
     res.redirect('/')}
@@ -147,12 +148,14 @@ router.post('/journey',async function(req,res,next){
 router.get('/delete-journey', function (req, res, next) {
   /* if(!req.session.userSession){
     res.redirect('/')} */
-    console.log(req.query.position);
-    console.log(req.session.dataJourney);
+
   req.session.dataJourney.splice(req.query.position, 1);
   
+  if (req.session.dataJourney.length === 0){
+    empty = true;
+  }
 
-  res.render('basket', { dataJourney: req.session.dataJourney })
+  res.render('basket', { dataJourney: req.session.dataJourney, empty })
 })
 
 
@@ -181,12 +184,12 @@ router.get('/lastTrips', async function (req, res, next) {
   var order = new ordersModel({
     userId : req.session.userSession.id,
     ordersId: ordersId
-
   });
- 
   orderSaved = await order.save();
   }
   
+
+
   res.render('lastTrips')
 });
 
